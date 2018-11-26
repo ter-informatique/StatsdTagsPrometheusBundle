@@ -47,12 +47,16 @@ class EventListener
 
     public function onKernelTerminate(PostResponseEvent $event): void
     {
-        $this->metricHandler->sendMetrics();
+        if (null !== $this->metricHandler) {
+            $this->metricHandler->sendMetrics();
+        }
     }
 
     public function onConsoleTerminate(ConsoleTerminateEvent $event): void
     {
-        $this->metricHandler->sendMetrics();
+        if (null !== $this->metricHandler) {
+            $this->metricHandler->sendMetrics();
+        }
     }
 
     public function addEventToListen(string $eventName, array $eventConfig): self
